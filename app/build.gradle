@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -38,6 +39,15 @@ dependencies {
     implementation deps.app_compat
     implementation deps.material
     implementation deps.constraint_layout
+
+    implementation deps.conductor
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
     testImplementation deps.junit
     androidTestImplementation deps.espresso.core
 }
