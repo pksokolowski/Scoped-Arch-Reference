@@ -1,4 +1,4 @@
-package com.github.pksokolowski.scopedarch.trending
+package com.github.pksokolowski.scopedarch.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.pksokolowski.scopedarch.base.BaseController
 
-class TrendingReposController : BaseController(){
+class MainFeatureController : BaseController(){
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup,

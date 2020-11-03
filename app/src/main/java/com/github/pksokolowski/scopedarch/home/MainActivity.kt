@@ -3,7 +3,7 @@ package com.github.pksokolowski.scopedarch.home
 import com.bluelinelabs.conductor.Controller
 import com.github.pksokolowski.scopedarch.R
 import com.github.pksokolowski.scopedarch.base.BaseActivity
-import com.github.pksokolowski.scopedarch.trending.TrendingReposController
+import com.github.pksokolowski.scopedarch.main.MainFeatureController
 
 class MainActivity : BaseActivity() {
 
@@ -11,5 +11,5 @@ class MainActivity : BaseActivity() {
         get() = R.layout.activity_main
 
     override val initialScreen: Controller
-        get() = TrendingReposController()
+        get() = MainFeatureController()
 }
