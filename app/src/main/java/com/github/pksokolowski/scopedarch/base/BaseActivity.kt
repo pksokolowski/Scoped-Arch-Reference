@@ -11,6 +11,7 @@ import com.github.pksokolowski.scopedarch.R
 import com.github.pksokolowski.scopedarch.di.ScreenInjector
 import com.github.pksokolowski.scopedarch.di.clearComponent
 import com.github.pksokolowski.scopedarch.di.inject
+import com.github.pksokolowski.scopedarch.ui.ScreenNavigator
 import java.lang.NullPointerException
 import java.util.*
 import javax.inject.Inject
@@ -25,7 +26,12 @@ abstract class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var screenInjector: ScreenInjector
 
+    @Inject
+    lateinit var screenNavigator: ScreenNavigator
+
     protected abstract val layoutRes: Int
+
+    protected abstract val initialScreen: Controller
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // assign an instance id, either new or the saved one, for dagger scoping.
@@ -41,6 +47,7 @@ abstract class BaseActivity : AppCompatActivity() {
         val containerView: ViewGroup = findViewById(R.id.screen_container)
             ?: throw NullPointerException("root of each screen layout must have id = screen_container")
         router = Conductor.attachRouter(this, containerView, savedInstanceState)
+        screenNavigator.initWithRouter(router, initialScreen)
         monitorBackStack()
         super.onCreate(savedInstanceState)
     }
@@ -67,8 +74,15 @@ abstract class BaseActivity : AppCompatActivity() {
         outState.putString(INSTANCE_ID_KEY, instanceId)
     }
 
+    override fun onBackPressed() {
+        if (!screenNavigator.pop()) {
+            super.onBackPressed()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        screenNavigator.clear()
         if (isFinishing) {
             clearComponent(this)
         }
