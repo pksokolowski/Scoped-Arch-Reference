@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Scoped Arch Reference</string>
+    <string name="error_loading_content">Error while loading content</string>
 </resources>

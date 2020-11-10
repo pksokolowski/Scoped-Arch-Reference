@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -24,13 +25,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+}
+
+androidExtensions {
+    // disable kotlin synthetics
+    features = ["parcelize"]
 }
 
 dependencies {
@@ -41,6 +54,10 @@ dependencies {
     implementation deps.constraint_layout
 
     implementation deps.conductor
+
+    implementation deps.rxjava3
+    implementation deps.rx_android
+    implementation deps.rxRelay
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android
