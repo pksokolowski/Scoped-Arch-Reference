@@ -26,24 +26,28 @@ class MainFeatureController : BaseController() {
     }
 
     override fun subscriptions(): Array<Disposable> {
-        return arrayOf<Disposable>(
+        return arrayOf(
             viewModel.loading
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { loading ->
-                    binding.loadingIndicator.setVisibility(if (loading) View.VISIBLE else View.GONE)
-                    binding.list.setVisibility(if (loading) View.GONE else View.VISIBLE)
-                    binding.tvError.setVisibility(if (loading) View.GONE else binding.tvError.visibility)
+                    binding.loadingIndicator.visibility = if (loading) View.VISIBLE else View.GONE
+                    binding.list.visibility = if (loading) View.GONE else View.VISIBLE
+                    binding.tvError.visibility =
+                        if (loading) View.GONE else binding.tvError.visibility
                 },
             viewModel.content
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((binding.list.adapter as ContentAdapter)::setData),
+                .subscribe {data ->
+                    val adapter = binding.list.adapter as ContentAdapter
+                    adapter.setData(data)
+                },
             viewModel.error
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { errorRes ->
                     when (errorRes) {
                         is Status.ERROR -> {
-                            binding.tvError.setVisibility(View.VISIBLE)
-                            binding.list.setVisibility(View.GONE)
+                            binding.tvError.visibility = View.VISIBLE
+                            binding.list.visibility = View.GONE
 
                             binding.tvError.setText(errorRes.errorStringRes)
                         }

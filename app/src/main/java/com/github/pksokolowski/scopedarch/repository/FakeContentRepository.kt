@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class FakeContentRepository @Inject constructor() {
 
-    fun getContent() = Single.fromObservable<List<Content>> {
+    fun getContent(): Single<List<Content>> = Single.fromObservable<List<Content>> {
         Observable.fromIterable(
             listOf(
                 Content(1, "abc", 1)
