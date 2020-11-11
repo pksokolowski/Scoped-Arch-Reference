@@ -4,19 +4,22 @@ import android.app.Application
 import com.github.pksokolowski.scopedarch.di.ActivityInjector
 import javax.inject.Inject
 
-class App: Application() {
+open class App : Application() {
 
     @Inject
     lateinit var activityInjector: ActivityInjector
 
-    private lateinit var appComponent: AppComponent
+    protected lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        val component = DaggerAppComponent.builder()
+        val component = initComponent()
+        component.inject(this)
+    }
+
+    protected open fun initComponent() =
+        DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .build()
 
-        component.inject(this)
-    }
 }

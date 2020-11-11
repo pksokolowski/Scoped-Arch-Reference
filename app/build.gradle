@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.github.pksokolowski.scopedarch.test.CustomTestRunner"
     }
 
     buildTypes {
@@ -64,6 +64,7 @@ dependencies {
     implementation deps.dagger.android_support
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
+    kaptAndroidTest deps.dagger.compiler
 
     testImplementation deps.junit
     androidTestImplementation deps.espresso.core
