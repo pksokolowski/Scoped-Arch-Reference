@@ -67,6 +67,8 @@ internal class ContentAdapter(private val onClick: ItemClickedListener? = null) 
 
         fun bind(content: Content) {
             this.content = content
+            binding.idText.text = content.id.toString()
+            binding.contentText.text = content.abc
         }
     }
 
