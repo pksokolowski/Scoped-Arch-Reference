@@ -10,7 +10,10 @@ import com.github.pksokolowski.scopedarch.di.inject
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
-abstract class BaseController : Controller() {
+abstract class BaseController : Controller {
+    constructor() : super()
+    constructor(bundle: Bundle) : super(bundle)
+
     private val disposables: CompositeDisposable = CompositeDisposable()
     private var injected: Boolean = false
 

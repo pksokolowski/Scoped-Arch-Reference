@@ -23,6 +23,10 @@ class TestNavigator @Inject constructor() : ScreenNavigator {
         return router.handleBack()
     }
 
+    override fun gotoDetails(something: String) {
+        TODO("Not yet implemented")
+    }
+
     override fun clear() {
         router = null
     }

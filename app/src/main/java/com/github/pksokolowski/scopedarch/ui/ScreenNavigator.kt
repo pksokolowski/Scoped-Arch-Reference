@@ -6,5 +6,6 @@ import com.bluelinelabs.conductor.Router
 interface ScreenNavigator {
     fun initWithRouter(router: Router, rootScreen: Controller)
     fun pop(): Boolean
+    fun gotoDetails(something: String)
     fun clear()
 }

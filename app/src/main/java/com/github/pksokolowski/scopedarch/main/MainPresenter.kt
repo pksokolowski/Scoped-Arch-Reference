@@ -4,13 +4,15 @@ import com.github.pksokolowski.scopedarch.di.ScreenScope
 import com.github.pksokolowski.scopedarch.model.Content
 import com.github.pksokolowski.scopedarch.repository.FakeContentRepository
 import com.github.pksokolowski.scopedarch.repository.IFakeContentRepository
+import com.github.pksokolowski.scopedarch.ui.ScreenNavigator
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @ScreenScope
 class MainPresenter @Inject constructor(
     private val viewModel: MainViewModel,
-    private val contentRepository: IFakeContentRepository
+    private val contentRepository: IFakeContentRepository,
+    private val screenNavigator: ScreenNavigator
 ) : ContentAdapter.ItemClickedListener {
     init {
         loadContent()
@@ -25,7 +27,7 @@ class MainPresenter @Inject constructor(
     }
 
     override fun onItemClicked(content: Content) {
-
+        screenNavigator.gotoDetails(content.abc)
     }
 
 }
